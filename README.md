@@ -4,7 +4,7 @@ A Twitter-like social media backend API built with Node.js, Express, TypeScript,
 
 ## Prerequisites
 
-- Node.js (v16 or higher)
+- Node.js (v20 or higher)
 - MongoDB (local or cloud instance)
 - Redis (for caching and rate limiting)
 
