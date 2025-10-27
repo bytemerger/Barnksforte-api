@@ -108,7 +108,6 @@ export default class UserService {
       throw new NotFoundException("User not found");
     }
 
-    // Get posts that were shared with this user using the array approach
     const sharedPosts = await Post.find({ 
       sharedWith: userId 
     })

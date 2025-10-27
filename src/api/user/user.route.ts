@@ -17,7 +17,7 @@ router.get('/', controller.getUsers);
 router.put('/:id/password', validation.updateUserPassword, controller.updateUserPassword);
 
 // posts
-router.get('/:id/shared-posts', controller.getUserSharedPosts); // this is meant to be posts shared to the user by other users
+router.get('/:id/shared-posts', controller.getUserSharedPosts);
 router.post('/:id/posts', validation.createPost, controller.createPost);
 router.get('/:id/posts', controller.getUserPosts);
 router.get('/:id/posts/:postId', controller.getUserPost); 
