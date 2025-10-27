@@ -1,13 +1,14 @@
 import * as bcrypt from 'bcryptjs';
 import { BadRequestException, NotFoundException } from "../../common/error";
 import User from "../../models/user";
-import Post from "../../models/post";
+import Post, { IPost } from "../../models/post";
 import Logger from "../../common/logger";
 import { 
   IUpdateUserPasswordPayload,
   ICreatePostPayload,
 } from "./user.interface";
 import { Types } from "mongoose";
+import Mail from '../../common/mail';
 
 export default class UserService {
   private logger = new Logger(this.constructor.name);
@@ -55,8 +56,8 @@ export default class UserService {
         throw new BadRequestException("One or more shared users not found");
       }
 
-      // Send email notifications (placeholder function)
-      await this.sendEmailNotifications(post, payload.sharedWith);
+      // TODO: Implement email notifications
+      // await this.sendEmailNotifications(post, payload.sharedWith);
     }
 
     this.logger.info(`Created post ${post._id} by user ${userId}`);
@@ -117,16 +118,9 @@ export default class UserService {
     return sharedPosts;
   }
 
-  // Placeholder function for email notifications
-  private async sendEmailNotifications(post: any, sharedUserIds: string[]) {
-    // This is a placeholder - you mentioned you'll implement this later
-    this.logger.info(`Sending email notifications for post ${post._id} to ${sharedUserIds.length} users`);
-    
-    // TODO: Implement actual email sending logic
-    // Example structure:
-    // for (const userId of sharedUserIds) {
-    //   const user = await User.findById(userId);
-    //   await this.sendEmail(user.email, 'New Post Shared', `A new post has been shared with you: ${post.content}`);
-    // }
+  private async sendEmailNotifications(post: IPost, sharedUserIds: string[]) {
+    const sharedUsers = await User.find({ _id: { $in: sharedUserIds } });
+    const emails = sharedUsers.map(user => user.email);
+    await Mail.sendSharedPostEmail(emails, post);
   }
 }

@@ -19,8 +19,8 @@ npm install
 3. Create a `.env` file in the root directory:
 ```env
 # Database
-MONGO_DB_URL=mongodb://localhost:27017/social-feed-
-DATABASE_NAME = barnksforte
+MONGO_DB_URL=mongodb://localhost:27017/social-feed-api
+DATABASE_NAME=barnksforte
 
 # Redis
 REDIS_URL=redis://localhost:6379
@@ -30,6 +30,13 @@ JWT_SECRET=your_super_secret_jwt_key_here
 
 # Internal Service Key (for client validation)
 INTERNAL_SERVICE_KEY=your_internal_service_key_here
+
+# Mail Configuration
+MAIL_SMTP_URL=smtp://username:password@smtp.gmail.com:587
+MAIL_DEFAULT_SENDER=noreply@barnksforte.com
+MAIL_DEFAULT_SENDER_NAME=Barnksforte
+
+PRODUCTION_MODE=false
 
 # Server
 PORT=5200
@@ -44,10 +51,13 @@ npm run dev
 ## Environment Variables
 
 - `MONGO_DB_URL`: MongoDB connection string (default: mongodb://localhost:27017/social-feed-api)
+- `DATABASE_NAME`: MongoDB database name (default: barnksforte)
 - `REDIS_URL`: Redis connection string (default: redis://localhost:6379)
 - `JWT_SECRET`: Secret key for JWT token signing
 - `INTERNAL_SERVICE_KEY`: Key for internal service authentication
-- `CORS_ORIGIN`: Allowed CORS origin for frontend (default: http://localhost:3000)
+- `MAIL_SMTP_URL`: SMTP server URL for email sending
+- `MAIL_DEFAULT_SENDER`: Default sender email address
+- `MAIL_DEFAULT_SENDER_NAME`: Default sender name
 - `PORT`: Server port (default: 5200)
 - `NODE_ENV`: Environment mode (development/production)
 
@@ -69,7 +79,6 @@ npm run dev
 
 1. **Start the server**: `npm run dev`
 2. **Health check**: Visit `http://localhost:5200/health`
-3. **API base URL**: `http://localhost:5200/v1`
 
 ## Scripts
 
