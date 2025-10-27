@@ -8,9 +8,12 @@ const router = Router();
 const controller = new Controller();
 
 const authMiddlewares = [authenticate, userAuth]
-// User management routes
+
 router.use(...authMiddlewares)
 
+router.get('/', controller.getUsers);
+
+// user management routes
 router.put('/:id/password', validation.updateUserPassword, controller.updateUserPassword);
 
 // posts

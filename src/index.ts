@@ -6,7 +6,7 @@ import User from './api/user/user.route'
 const router = Router()
 
 router.use('/auth/', Auth)
-router.use('/user/', User)
+router.use('/users/', User)
 
 router.use((_, res) => {
   res.status(StatusCodes.NOT_FOUND).json({

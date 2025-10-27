@@ -12,6 +12,11 @@ import { Types } from "mongoose";
 export default class UserService {
   private logger = new Logger(this.constructor.name);
 
+  async getUsers() {
+    const users = await User.find();
+    return users;
+  }
+
   async updateUserPassword(userId: string, payload: IUpdateUserPasswordPayload) {
     const user = await User.findById(userId);
     if (!user) {

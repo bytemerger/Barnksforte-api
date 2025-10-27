@@ -33,6 +33,7 @@ const UserSchema = new Schema(
       virtuals: true,
       transform: function(doc: any, ret: any) {
         delete ret.password;
+        delete ret.block; // delete block object for json/security by obscurity
         delete ret.__v;
         delete ret._id;
         return ret;

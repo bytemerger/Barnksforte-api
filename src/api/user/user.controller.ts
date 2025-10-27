@@ -5,6 +5,20 @@ import UserService from './user.service';
 export default class UserController {
   private service = new UserService();
 
+  getUsers = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const response = await this.service.getUsers();
+
+      res.status(StatusCodes.OK).json({
+        status: StatusCodes.OK,
+        message: 'Users retrieved successfully',
+        data: response || null 
+      })
+    } catch (err) {
+      next(err)
+    }
+  }
+  
   updateUserPassword = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const response = await this.service.updateUserPassword(req.params.id, req.body);
